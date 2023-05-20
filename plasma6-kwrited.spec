@@ -18,6 +18,8 @@ Source0:	http://download.kde.org/%{stable}/plasma/%{major}/%{name}-%{version}.ta
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF6DBusAddons)
 BuildRequires:	cmake(KF6Pty)
+BuildRequires:	cmake(KF6I18n)
+BuildRequires:	cmake(KF6Notifications)
 BuildRequires:	cmake(Qt6)
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
