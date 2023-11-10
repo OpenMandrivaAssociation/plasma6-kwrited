@@ -1,11 +1,10 @@
 %define major %(echo %{version} |cut -d. -f1-3)
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
-
-%define git 20231103
+%define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
+#define git 20231103
 
 Summary:	Application for monitoring messages sent with write or wall
 Name:		plasma6-kwrited
-Version:	5.240.0
+Version:	5.27.80
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -13,7 +12,7 @@ Url:		http://kde.org/
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/kwrited/-/archive/master/kwrited-master.tar.bz2#/kwrited-%{git}.tar.bz2
 %else
-Source0:	http://download.kde.org/%{stable}/plasma/%{major}/%{name}-%{version}.tar.xz
+Source0:	http://download.kde.org/%{stable}/plasma/%{major}/kwrited-%{version}.tar.xz
 %endif
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF6DBusAddons)
