@@ -6,7 +6,7 @@
 
 Summary:	Application for monitoring messages sent with write or wall
 Name:		plasma6-kwrited
-Version:	6.1.4
+Version:	6.1.5
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
