@@ -5,9 +5,9 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Summary:	Application for monitoring messages sent with write or wall
-Name:		plasma6-kwrited
+Name:		kwrited
 Version:	6.3.4
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://kde.org/
@@ -26,6 +26,11 @@ BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Gui)
 BuildRequires:	cmake(Qt6Widgets)
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-kwrited
 
 %description
 Application for monitoring messages sent with write or wall.
@@ -34,19 +39,3 @@ Application for monitoring messages sent with write or wall.
 %{_bindir}/kwrited
 %{_sysconfdir}/xdg/autostart/kwrited-autostart.desktop
 %{_datadir}/knotifications6/kwrited.notifyrc
-
-#----------------------------------------------------------------------------
-
-%prep
-%autosetup -p1 -n kwrited-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
